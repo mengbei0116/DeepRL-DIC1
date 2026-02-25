@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meng's Space</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Beautiful dynamic gradient background */
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text-primary);
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Ambient glowing orbs in background for enhanced aesthetics */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            opacity: 0.6;
+            animation: float 10s infinite ease-in-out alternate;
+        }
+
+        .orb-1 {
+            width: 350px;
+            height: 350px;
+            background: rgba(255, 255, 255, 0.3);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 450px;
+            height: 450px;
+            background: rgba(255, 255, 255, 0.2);
+            bottom: 10%;
+            right: 10%;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(30px, -50px) scale(1.1); }
+        }
+
+        /* Glassmorphism card container */
+        .card {
+            position: relative;
+            z-index: 10;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3.5rem 4rem;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            transform: translateY(0);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            max-width: 90%;
+            width: 480px;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px 0 rgba(31, 38, 135, 0.45);
+        }
+
+        .greeting {
+            font-size: 1.25rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .name {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            letter-spacing: -2px;
+            /* Text gradient */
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.6) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Dynamic Clock Display */
+        .clock-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .time {
+            font-size: 3.5rem;
+            font-weight: 500;
+            font-variant-numeric: tabular-nums;
+            line-height: 1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+        }
+
+        .date {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            letter-spacing: 1.5px;
+        }
+
+        /* Pulse animation for time separator */
+        .colon {
+            display: inline-block;
+            animation: blink 1.5s ease-in-out infinite;
+            margin: 0 2px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .card {
+                padding: 2.5rem 2rem;
+                width: 90%;
+            }
+            .name {
+                font-size: 4rem;
+            }
+            .time {
+                font-size: 2.8rem;
+            }
+            .date {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background glowing orbs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <!-- Main Content Container with Glassmorphism -->
+    <div class="card">
+        <div class="greeting">Welcome to the space of</div>
+        <h1 class="name">Meng</h1>
+        
+        <div class="clock-container">
+            <div class="time" id="timeDisplay">
+                --<span class="colon">:</span>--<span class="colon">:</span>--
+            </div>
+            <div class="date" id="dateDisplay">
+                Loading date...
+            </div>
+        </div>
+    </div>
+
+    <!-- Clock Logic -->
+    <script>
+        function updateClock() {
+            const now = new Date();
+            
+            // Format time (HH:MM:SS)
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            // Update time HTML with animated colons
+            document.getElementById('timeDisplay').innerHTML = 
+                `${hours}<span class="colon">:</span>${minutes}<span class="colon">:</span>${seconds}`;
+            
+            // Format date (e.g., "Wednesday, February 25, 2026")
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateString = now.toLocaleDateString('en-US', dateOptions);
+            document.getElementById('dateDisplay').textContent = dateString;
+        }
+
+        // Initialize clock immediately
+        updateClock();
+        
+        // Update clock every second
+        setInterval(updateClock, 1000);
+    </script>
+</body>
+</html>
